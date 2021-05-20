@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import TodoItem from './todolistItem';
+import TodoTypes from './todolistTypes';
 
 const App = () => {
   const [ todolist, setTodolist ] = useState([]);
+  const [ todoType, setTodoType ] = useState('0');
 
   // Mounted
   useEffect(() => {
@@ -26,20 +28,36 @@ const App = () => {
   }, [ todolist ]);
 
   // Method
-  const changeStatus = (index) => {
+  const changeTodoType = (e) => {
+    setTodoType(e.target.value);
+  };
+
+  const changeStatus = (id) => {
     let todos = [...todolist];
+    let index = todos.findIndex(todo => todo.id === id);
     todos[index].status = !todos[index].status;
     setTodolist(todos);
   };
 
   return (
     <div className="main">
+      <TodoTypes todoType={ todoType } changeTodoType={ changeTodoType } />
       <ul>
-        { todolist.map((todo, index) => 
-          <li key={todo.id}>
-            <TodoItem todo={ todo } index={ index } changeStatus={ changeStatus } />
-          </li>
-        )}
+        {
+          todolist.filter(todo => {
+            if (todoType === '0') {
+              return todo.status === false;
+            } else if (todoType === '1') {
+              return todo.status === true;
+            } else {
+              return todo;
+            }
+          }).map(todo => 
+            <li key={todo.id}>
+              <TodoItem todo={ todo } changeStatus={ changeStatus } />
+            </li>
+          )
+        }
       </ul>
     </div>
   );
