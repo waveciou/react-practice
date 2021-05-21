@@ -8,12 +8,14 @@ const App = () => {
 
   // Mounted
   useEffect(() => {
+    console.log('mounted');
+
     let todos = [];
 
     for (let i = 0; i < 10; i++) {
       todos.push({
         id: i,
-        name: `項目_${i + 1}`,
+        name: `Item_${i + 1}`,
         status: false
       });
     }
@@ -23,7 +25,7 @@ const App = () => {
 
   // Watch And Computed
   useEffect(() => {
-    console.log('數據有變化');
+    console.log('Data has change');
     console.log(todolist);
   }, [ todolist ]);
 
@@ -52,8 +54,8 @@ const App = () => {
             } else {
               return todo;
             }
-          }).map(todo => 
-            <li key={todo.id}>
+          }).map(todo =>
+            <li key={ todo.id }>
               <TodoItem todo={ todo } changeStatus={ changeStatus } />
             </li>
           )
