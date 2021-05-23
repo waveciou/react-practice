@@ -4,7 +4,7 @@ import TodoTypes from './todolistTypes';
 
 const App = () => {
   const [ todolist, setTodolist ] = useState([]);
-  const [ todoType, setTodoType ] = useState('0');
+  const [ todoType, setTodoType ] = useState('2');
 
   // Mounted
   useEffect(() => {
