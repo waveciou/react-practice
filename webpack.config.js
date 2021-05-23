@@ -1,11 +1,22 @@
 const path = require('path');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const CopyPlugin = require('copy-webpack-plugin');
+// const CopyPlugin = require('copy-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 // 環境變數
 console.log(process.env.NODE_ENV);
+
+const HTML_COLLECTIONS = [ 'index', 'todolist' ];
+
+const HTML_PROVIDER = HTML_COLLECTIONS.map(name => {
+  return new HtmlWebpackPlugin({
+    filename: `${name}.html`,
+    template: `./src/${name}.html`,
+    minify: true,
+    inject: false
+  });
+});
 
 // 主要設定
 module.exports = {
@@ -76,30 +87,7 @@ module.exports = {
     new MiniCssExtractPlugin({
       filename: './resources/css/[name].css'
     }),
-    new HtmlWebpackPlugin({
-      filename: 'index.html',
-      template: './src/index.html',
-      minify: true,
-      inject: false
-    }),
-    new HtmlWebpackPlugin({
-      filename: 'todolist.html',
-      template: './src/todolist.html',
-      minify: true,
-      inject: false
-    }),
-    // new CopyPlugin({
-    //   patterns: [
-    //     {
-    //       from: './src/resources/img/favicon',
-    //       to: './resources/img/favicon'
-    //     },
-    //     {
-    //       from: './src/resources/img/demo.gif',
-    //       to: './resources/img/demo.gif'
-    //     }
-    //   ]
-    // }),
+    ...HTML_PROVIDER
   ],
   devServer: {
     contentBase: path.join(__dirname, './dist'),
