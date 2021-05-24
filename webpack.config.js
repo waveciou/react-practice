@@ -1,15 +1,12 @@
 const path = require('path');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-// const CopyPlugin = require('copy-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
-// 環境變數
-console.log(process.env.NODE_ENV);
+const PROJECTS = [ 'index', 'todolist', 'foodchecked' ];
 
-const HTML_COLLECTIONS = [ 'index', 'todolist' ];
-
-const HTML_PROVIDER = HTML_COLLECTIONS.map(name => {
+// HTML
+const HTML_PROVIDER = PROJECTS.map(name => {
   return new HtmlWebpackPlugin({
     filename: `${name}.html`,
     template: `./src/${name}.html`,
@@ -18,12 +15,17 @@ const HTML_PROVIDER = HTML_COLLECTIONS.map(name => {
   });
 });
 
+// JavaScript Entry
+const ENTRY_PROVIDER = {};
+
+PROJECTS.forEach(name => {
+  const _name = name === 'index' ? 'main' : name;
+  ENTRY_PROVIDER[_name] = path.resolve(__dirname, `./src/resources/js/${_name}.js`);
+});
+
 // 主要設定
 module.exports = {
-  entry: {
-    main: path.resolve(__dirname, './src/resources/js/main.js'),
-    todolist: path.resolve(__dirname, './src/resources/js/todolist.js')
-  },
+  entry: ENTRY_PROVIDER,
   output: {
     filename: './resources/js/[name].js',
     path: path.resolve(__dirname, './dist')
