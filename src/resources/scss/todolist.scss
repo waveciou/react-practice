@@ -1,0 +1,61 @@
+@charset 'UTF-8';
+@import './utils/_utils.scss';
+
+.todolist {
+  width: 100%;
+  margin: auto;
+}
+
+.todolist__header {
+  margin: 1.5rem 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  @include min-width(640px + 20px) {
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+  }
+}
+
+.todolist__type {
+  margin-right: 10px;
+  margin-left: 10px;
+}
+
+.btn {
+  height: 40px;
+  padding: 10px;
+  line-height: 20px;
+  color: $color-white;
+  background-color: $color-black;
+  border-radius: 5px;
+}
+
+.todolist__list {
+  > li {
+    margin-bottom: 1rem;
+  }
+}
+
+.todolist__item {
+  padding: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: relative;
+  background-color: $color-white;
+  border: 1px $color-white solid;
+  border-radius: 3px;
+}
+
+.todolist__content {
+  span {
+    color: $color-blue-dark;
+  }
+}
+
+.todolist__btn {
+  padding-top: 5px;
+  padding-bottom: 5px;
+}

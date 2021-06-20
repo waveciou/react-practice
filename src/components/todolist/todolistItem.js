@@ -4,9 +4,15 @@ const todoItem = (props) => {
   const { todo, changeStatus } = props;
 
   return (
-    <div>
-      <p>{ `${todo.name} ${todo.status}` }</p>
-      <button onClick={ () => { changeStatus(todo.id); } }>set</button>
+    <div className="todolist__item">
+      <div className="todolist__content">
+        <p>Name: <span>{ `${todo.name}` }</span></p>
+        <p>Status: <span>{ `${todo.status}` }</span></p>
+      </div>
+      <button
+        className="btn todolist__btn"
+        onClick={ () => { changeStatus(todo.id); } }
+      >Set Status</button>
     </div>
   );
 };

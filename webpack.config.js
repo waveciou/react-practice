@@ -49,12 +49,13 @@ module.exports = {
         include: path.resolve('./src/resources/scss'),
         exclude: path.resolve('./node_modules'),
         use: [
-          {
-            loader: MiniCssExtractPlugin.loader,
-            options: { 
-              publicPath: '../../',
-            },
-          },
+          // {
+          //   loader: MiniCssExtractPlugin.loader,
+          //   options: { 
+          //     publicPath: '../../',
+          //   },
+          // },
+          'style-loader',
           'css-loader',
           {
             loader: 'postcss-loader',

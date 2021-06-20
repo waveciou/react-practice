@@ -42,9 +42,9 @@ const App = () => {
   };
 
   return (
-    <div className="main">
+    <div className="todolist">
       <TodoTypes todoType={ todoType } changeTodoType={ changeTodoType } />
-      <ul>
+      <ul className="todolist__list">
         {
           todolist.filter(todo => {
             if (todoType === '0') {

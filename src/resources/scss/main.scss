@@ -1,0 +1,72 @@
+@charset 'UTF-8';
+@import './utils/_utils.scss';
+@import './_reset.scss';
+
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@500;700&display=fallback');
+
+@font-face {
+  font-family: 'Font Awesome 5 regular';
+  font-style: normal;
+  font-weight: 900;
+  font-display: fallback;
+  src: url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/webfonts/fa-regular-400.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'Font Awesome 5 solid';
+  font-style: normal;
+  font-weight: 900;
+  font-display: fallback;
+  src: url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/webfonts/fa-solid-900.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'Font Awesome 5 brands';
+  font-style: normal;
+  font-weight: 900;
+  font-display: fallback;
+  src: url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/webfonts/fa-brands-400.ttf') format('truetype');
+}
+
+h1 {
+  margin-top: 1rem;
+  font-size: 36px;
+  font-weight: 700;
+  text-align: center;
+  line-height: 1.2em;
+  margin-bottom: 1rem;
+}
+
+.wrap {
+  width: calc(100% - 20px);
+  max-width: 640px;
+  margin: auto;
+
+  @include min-width(640px + 20px) {
+    width: 100%;
+  }
+}
+
+.home-contents {
+  padding-left: 25px;
+  margin: 2rem 0;
+  list-style: disc;
+
+  > li {
+    margin-bottom: 1rem;
+  }
+}
+
+.home-contents__link {
+  display: inline-block;
+  font-size: 18px;
+  line-height: 1.6em;
+  color: $color-black;
+
+  @include min-width(1025px) {
+    &:hover,
+    &:focus {
+      color: $color-blue-dark;
+    }
+  }
+}
