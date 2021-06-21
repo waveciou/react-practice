@@ -3,7 +3,7 @@ const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
-const PROJECTS = [ 'index', 'todolist', 'foodchecked', 'globalcounter', 'filterinput' ];
+const PROJECTS = [ 'index', 'todolist', 'foodchecked', 'globalcounter', 'filterinput', 'arraylistener' ];
 
 // HTML
 const HTML_PROVIDER = PROJECTS.map(name => {
