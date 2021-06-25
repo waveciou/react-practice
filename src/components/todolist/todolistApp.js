@@ -5,6 +5,7 @@ import TodoTypes from './todolistTypes';
 const App = () => {
   const [ todolist, setTodolist ] = useState([]);
   const [ todoType, setTodoType ] = useState('2');
+  const [ todoInput, setTodoInput ] = useState('');
 
   // Mounted
   useEffect(() => {
@@ -13,9 +14,11 @@ const App = () => {
     let todos = [];
 
     for (let i = 0; i < 10; i++) {
+      const id = `${getCurrentId()}_${i + 1}`;
+
       todos.push({
-        id: i,
-        name: `Item_${i + 1}`,
+        id: id,
+        name: id,
         status: false
       });
     }
@@ -26,12 +29,11 @@ const App = () => {
   // Watch And Computed
   useEffect(() => {
     console.log('Data has change');
-    console.log(todolist);
   }, [ todolist ]);
 
   // Method
-  const changeTodoType = (e) => {
-    setTodoType(e.target.value);
+  const changeTodoType = (value) => {
+    setTodoType(value);
   };
 
   const changeStatus = (id) => {
@@ -41,9 +43,50 @@ const App = () => {
     setTodolist(todos);
   };
 
+  const getCurrentId = () => {
+    const date = new Date();
+    return date.getTime();
+  };
+
+  const submitHandler = () => {
+    if (todoInput === '') return false;
+
+    let _todoList = [...todolist];
+
+    const result = {
+      id: `${getCurrentId()}`,
+      name: todoInput,
+      status: false
+    };
+
+    _todoList.push(result);
+    setTodolist(_todoList);
+    setTodoInput('');
+  };
+
   return (
     <div className="todolist">
+      <div className="todolist__header">
+        <div className="todolist__header-fieldset">
+          <input
+            type="text"
+            value={todoInput}
+            onChange={(e) => {
+              const result = (e.target.value).trim();
+              setTodoInput(result);
+            }}
+          />
+        </div>
+        <div className="todolist__header-control">
+          <button
+            className="btn"
+            onClick={() => { submitHandler(); }}
+          >submit</button>
+        </div>
+      </div>
+
       <TodoTypes todoType={ todoType } changeTodoType={ changeTodoType } />
+
       <ul className="todolist__list">
         {
           todolist.filter(todo => {
